@@ -1,0 +1,36 @@
+---
+- name: Check if deploy_before scripts exist
+  ansible.builtin.stat:
+    path: "{{ item }}"
+  delegate_to: localhost
+  register: deploy_before_paths
+  loop: "{{ deploy_before | default([]) }}"
+
+- name: Include deploy_before tasks
+  ansible.builtin.include_tasks: "{{ include_path.item }}"
+  loop: "{{ deploy_before_paths.results }}"
+  loop_control:
+    loop_var: include_path
+  when: include_path.stat.exists
+  tags: deploy-before
+
+- ansible.builtin.import_tasks: initialize.yml
+- ansible.builtin.import_tasks: update.yml
+- ansible.builtin.import_tasks: prepare.yml
+- ansible.builtin.import_tasks: build.yml
+- ansible.builtin.import_tasks: share.yml
+- ansible.builtin.import_tasks: finalize.yml
+
+- name: Check if deploy_after scripts exist
+  ansible.builtin.stat:
+    path: "{{ item }}"
+  delegate_to: localhost
+  register: deploy_after_paths
+  loop: "{{ deploy_after | default([]) }}"
+- name: Include deploy_after tasks
+  ansible.builtin.include_tasks: "{{ include_path.item }}"
+  loop: "{{ deploy_after_paths.results }}"
+  loop_control:
+    loop_var: include_path
+  when: include_path.stat.exists
+  tags: deploy-after

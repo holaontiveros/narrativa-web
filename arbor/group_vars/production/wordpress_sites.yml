@@ -1,0 +1,20 @@
+# Created by trellis-cli v1.12.1
+# Documentation: https://roots.io/trellis/docs/wordpress-sites/
+
+wordpress_sites:
+  la-narrativa.com.mx:
+    site_hosts:
+      - canonical: la-narrativa.com.mx
+        redirects:
+          - www.la-narrativa.com.mx
+    local_path: ../site
+    branch: main
+    repo: git@github.com:holaontiveros/saag-web.git
+    repo_subtree_path: site
+    multisite:
+      enabled: false
+    ssl:
+      enabled: true
+      provider: letsencrypt
+    cache:
+      enabled: false

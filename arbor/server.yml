@@ -1,0 +1,26 @@
+---
+- name: Variable check
+  import_playbook: variable-check.yml
+  vars:
+    playbook: deploy.yml
+
+- name: Test Connection
+  hosts: web:&{{ env }}
+  gather_facts: false
+  vars:
+    dynamic_user: false
+  roles:
+    - { role: connection, tags: [connection, always] }
+
+- name: Configure site in server
+  hosts: web:&{{ env }}
+  become: yes
+  tasks:
+    - name: Configure site in server
+      ansible.builtin.shell:
+        cmd: |
+          # exit code 1 when failed and text is domainName: This value already exists. \n siteUser: This value already exists.
+          # exit code 0 when success and text is Site www.domain.com has been added.
+          clpctl site:add:php --domainName=www.domain.com --phpVersion=8.2 --vhostTemplate='Generic' --siteUser=john --siteUserPassword='!secretPassword!'
+        changed_when: "'site was added' in result.stdout"
+        failed_when: "result.rc == 1 and 'different text' in result.stdout"

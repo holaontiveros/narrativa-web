@@ -1,0 +1,25 @@
+# Created by trellis-cli v1.12.1
+# Documentation: https://roots.io/trellis/docs/vault/
+
+vault_mysql_root_password: HpQPT9iUh.hRNKvAzZ8_PytkWxzxvDhtD_9FGdzXa_ELMgGQzxBah2BBk4A..VN6
+vault_users:
+  - name: "{{ admin_user }}"
+    password: dqzNy-@6MtNZ8vFmmsjvG3@sdnnfJQB@Ztx2R8vh*PjTxgd-oWNp9asepruch9UR
+    salt: 1hiqbbtuHj3JcDZYjLpevlWWjtrPzSPB6hF7v6qELYH22PaABUZv7yuf2pNVjQdS
+vault_wordpress_sites:
+  la-narrativa.com.mx:
+    admin_password: 6bMNqBw!vXP123qeY*rAANQ6g7nXchoTuvzp<zfasds9HdNzVBQr_x6K@-yN!Ff-
+    env:
+      db_password: i5KKy5regujCJBTeGNvj
+      db_name: la-narrativa
+      db_host: private-db-mysql-nyc3-97063-do-user-1520713-0.j.db.ondigitalocean.com:25060
+      db_user: la-narrativa
+      db_prefix: wp_
+      auth_key: "-.N]?jiynqVh49dUK0=d4xk}PflZo/Ya;R&ze9S@H]r4*Hsz,O[w}>,u,zNDGvJ<"
+      secure_auth_key: "-3RvjX_N/C-4@@IV>ZE#QpdgvJQS<=};{}Vscv^Z:P%3^50FDf!q(z5CXNC,[l&:"
+      logged_in_key: "qnPyTEP:eiAE|Qz;kJq0KxR6(O2n#pcUJq5S`<U0i-#1/z`n`T/LjMJo4)Es,i;M"
+      nonce_key: "9_G0<}*z/rrkmz#Ss0qKxa0;DuSVYcnltc;HX86ZTg;6q7=4b*uphmDq(kC!`-g0"
+      auth_salt: "XO7^1he}v[1W`b6f+=jdXuwk!s;ANb|v,LkQfCqrSWKb/`Pl/r?r.)9`&7>9IzCk"
+      secure_auth_salt: "Ma?9tkd2ETb>!x1$,jujZr9+k5E>m4[57p.16AjjDWN_.&<G}?,2WTDx-#rIo9gD"
+      logged_in_salt: "DHDV@GNu!&$gP99@$=Qj./<hFnl2kMSPG{rjkq$5[|c+.p=0:}E*/wuJx}Uo<5nu"
+      nonce_salt: "lvhuv@o#&]#)Q#H3g[81gMU.,is(dY?XdQXsGM8A{ibalYYD^(n{]s`mGT(Y7H0q"
