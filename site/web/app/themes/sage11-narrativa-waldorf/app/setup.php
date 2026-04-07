@@ -85,6 +85,7 @@ add_action('after_setup_theme', function () {
      */
     register_nav_menus([
         'primary_navigation' => __('Primary Navigation', 'sage'),
+        'category_navigation' => __('Category Navigation', 'sage'),
     ]);
 
     /**
@@ -136,6 +137,10 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#customize-selective-refresh-widgets
      */
     add_theme_support('customize-selective-refresh-widgets');
+
+
+
+    load_textdomain('sage', get_template_directory() . '/resources/lang/' . determine_locale() . '.mo');
 }, 20);
 
 /**
@@ -143,21 +148,25 @@ add_action('after_setup_theme', function () {
  *
  * @return void
  */
-add_action('widgets_init', function () {
-    $config = [
-        'before_widget' => '<section class="widget %1$s %2$s">',
-        'after_widget' => '</section>',
-        'before_title' => '<h3>',
-        'after_title' => '</h3>',
-    ];
+// add_action('widgets_init', function () {
+//     $config = [
+//         'before_widget' => '<section class="widget %1$s %2$s">',
+//         'after_widget' => '</section>',
+//         'before_title' => '<h3>',
+//         'after_title' => '</h3>',
+//     ];
 
-    register_sidebar([
-        'name' => __('Primary', 'sage'),
-        'id' => 'sidebar-primary',
-    ] + $config);
+//     register_sidebar([
+//         'name' => __('Primary', 'sage'),
+//         'id' => 'sidebar-primary',
+//     ] + $config);
 
-    register_sidebar([
-        'name' => __('Footer', 'sage'),
-        'id' => 'sidebar-footer',
-    ] + $config);
-});
+//     register_sidebar([
+//         'name' => __('Footer', 'sage'),
+//         'id' => 'sidebar-footer',
+//     ] + $config);
+// });
+
+add_action('enqueue_block_editor_assets', function () {
+    wp_dequeue_script('feedzy-gutenberg-block-js');
+}, 20);

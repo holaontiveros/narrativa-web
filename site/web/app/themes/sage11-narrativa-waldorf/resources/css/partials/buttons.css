@@ -1,0 +1,59 @@
+.btn,
+.nav-links a,
+.cta .nav-link {
+  @apply inline-flex cursor-pointer items-center justify-center gap-x-3 rounded-none px-6 py-3 text-lg leading-6 font-bold tracking-widest uppercase no-underline transition-colors disabled:pointer-events-none;
+
+  i {
+    @apply mr-1;
+  }
+}
+
+.btn:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+.btn-primary,
+.nav-links a,
+.cta .nav-link {
+  @apply border-primary-500 bg-primary-500 hover:border-primary-700 hover:bg-primary-700 text-white visited:text-white;
+
+  i {
+    @apply text-white;
+  }
+
+  &:hover i {
+    @apply text-primary-900;
+  }
+}
+
+.btn-secondary {
+  @apply border-secondary-300 bg-secondary-300 hover:border-secondary-100 hover:bg-secondary-100 font-bold text-white visited:text-white hover:text-white;
+
+  i {
+    @apply text-primary-600;
+  }
+
+  &:hover i {
+    @apply text-primary-900;
+  }
+}
+
+.btn-tertiary {
+  @apply hover:border-primary-300 hover:bg-primary-300 hover:text-primary-900 dark:hover:text-primary-900 flex items-center justify-start border-transparent bg-white px-6 text-left text-sm text-black normal-case visited:text-black dark:text-white;
+
+  i {
+    @apply text-primary-500 dark:text-primary-900;
+  }
+
+  &:hover i {
+    @apply text-primary-500 dark:text-primary-600;
+  }
+}
+
+.btn-link {
+  @apply border-0 bg-transparent p-0 text-left font-semibold tracking-wide text-black capitalize visited:text-black hover:bg-transparent hover:underline hover:underline-offset-4 dark:text-white;
+
+  i {
+    @apply text-primary-900 dark:text-white;
+  }
+}

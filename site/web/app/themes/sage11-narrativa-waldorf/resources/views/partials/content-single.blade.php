@@ -1,23 +1,34 @@
-<article @php(post_class('h-entry'))>
-  <header>
-    <h1 class="p-name">
-      {!! $title !!}
-    </h1>
+        {!! $getFeaturedImage($post, 'w-full h-75 object-cover mb-6') !!}
 
-    @include('partials.entry-meta')
-  </header>
+        <article @php(post_class('h-entry'))>
+            <div class="prose mx-auto max-w-3xl">
+                <header>
+                    <h1 class="p-name">
+                        {!! $title !!}
+                    </h1>
 
-  <div class="e-content">
-    @php(the_content())
-  </div>
+                </header>
 
-  @if ($pagination())
-    <footer>
-      <nav class="page-nav" aria-label="Page">
-        {!! $pagination !!}
-      </nav>
-    </footer>
-  @endif
+                <div class="e-content">
+                    @php(the_content())
+                </div>
+            </div>
 
-  @php(comments_template())
-</article>
+            @if ($pagination())
+                <footer>
+                    <nav class="page-nav" aria-label="Page">
+                        {!! $pagination !!}
+                    </nav>
+                </footer>
+            @endif
+
+
+            <div class="mx-auto max-w-3xl">
+                @include('partials.entry-meta')
+
+                @php(comments_template())
+
+            </div>
+
+
+        </article>

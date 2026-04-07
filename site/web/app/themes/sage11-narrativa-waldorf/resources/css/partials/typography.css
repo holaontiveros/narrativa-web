@@ -1,0 +1,59 @@
+@layer components {
+  .headline-1 {
+    @apply text-5xl/none font-bold tracking-wide;
+  }
+
+  .headline-2 {
+    @apply text-[2.5rem]/none font-bold tracking-wide;
+  }
+
+  .headline-3 {
+    @apply text-xl/none font-bold capitalize lg:text-2xl/none;
+  }
+
+  .headline-4 {
+    @apply text-2xl font-bold capitalize lg:text-3xl/none;
+  }
+
+  .headline-5 {
+    @apply text-xl font-bold capitalize lg:text-xl;
+  }
+
+  /* .subtitle-1 {
+    @apply text-xl font-extrabold uppercase tracking-widest;
+  } */
+
+  /* Normal (big text) */
+  .body-1 {
+    @apply text-xl font-normal;
+  }
+
+  /* Pretty big text */
+  .body-2 {
+    @apply text-2xl font-normal lg:text-3xl;
+  }
+
+  /* Normal base text */
+  .body-3 {
+    @apply text-base font-normal lg:text-lg;
+  }
+
+  .headline-overline {
+    @apply after:bg-primary-500 !mb-4 text-xs font-bold uppercase after:absolute after:-bottom-4 after:left-0 after:h-[2px] after:w-8 dark:after:bg-white;
+  }
+
+  .caption {
+    @apply text-xs font-normal;
+  }
+
+  .footer-text {
+    @apply text-sm font-normal;
+  }
+
+  [class^='headline-'] span,
+  [class*='headline-'] span,
+  [class^='body-'] span,
+  [class*='body-'] span {
+    @apply text-primary-700;
+  }
+}

@@ -1,0 +1,141 @@
+# Copyright (C) 2026 Javier Ontiveros
+# This file is distributed under the MIT License.
+msgid ""
+msgstr ""
+"Project-Id-Version: La Narrativa - Waldorf Theme 11.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/sage11-narrativa-waldorf\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-04-07T21:54:33+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: sage\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "La Narrativa - Waldorf Theme"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://roots.io/sage/"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "Theme designed exclusively for La Narrativa, based on the Sage 11 starter theme."
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Javier Ontiveros"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "mailto:hola@javo.work"
+msgstr ""
+
+#: app/filters.php:15
+msgid "Continued"
+msgstr ""
+
+#: app/setup.php:87
+msgid "Primary Navigation"
+msgstr ""
+
+#: app/setup.php:88
+msgid "Category Navigation"
+msgstr ""
+
+#: app/Support/Elementor/Skins/Buttons/Buttons.php:37
+msgid "Primary button"
+msgstr ""
+
+#: app/Support/Elementor/Skins/Buttons/Buttons.php:44
+msgid "Secondary button"
+msgstr ""
+
+#: app/Support/Elementor/Skins/Buttons/Buttons.php:51
+msgid "Tertiary button"
+msgstr ""
+
+#: app/Support/Elementor/Skins/Buttons/Buttons.php:54
+msgid "Link button"
+msgstr ""
+
+#: app/Support/Elementor/Skins/Buttons/Buttons.php:63
+msgid "Use dark theme?"
+msgstr ""
+
+#: app/Support/Shortcodes.php:48
+msgid "No shortcode path provided"
+msgstr ""
+
+#. translators: %1$s is replaced with the number of comments and %2$s with the post title
+#: app/View/Composers/Comments.php:25
+msgctxt "comments title"
+msgid "%1$s response to &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s responses to &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/View/Composers/Comments.php:26
+msgctxt "comments title"
+msgid "One"
+msgstr ""
+
+#: app/View/Composers/Comments.php:57
+msgid "&larr; Older comments"
+msgstr ""
+
+#: app/View/Composers/Comments.php:71
+msgid "Newer comments &rarr;"
+msgstr ""
+
+#: app/View/Composers/Post.php:34
+msgid "Latest Posts"
+msgstr ""
+
+#. translators: %s is replaced with the search query
+#: app/View/Composers/Post.php:44
+msgid "Search Results for %s"
+msgstr ""
+
+#: app/View/Composers/Post.php:50
+msgid "Not Found"
+msgstr ""
+
+#: app/View/Composers/Post.php:63
+msgid "Pages:"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Custom Template"
+msgstr ""
+
+#: resources/views/forms/search.blade.php:4
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: resources/views/forms/search.blade.php:10
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+
+#: resources/views/forms/search.blade.php:16
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#: resources/views/layouts/app.blade.php:22
+msgid "Skip to content"
+msgstr ""
+
+#: resources/views/search.blade.php:8
+msgid "Sorry, no results were found."
+msgstr ""

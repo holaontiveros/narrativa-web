@@ -1,8 +1,8 @@
-name: saag
+name: la-narrativa
 recipe: wordpress
 config:
   webroot: web
 services:
   appserver:
-    type: php:8.2 # Bedrock requires PHP >= 8.0
+    type: php:8.3 # Bedrock requires PHP >= 8.3
     portforward: true

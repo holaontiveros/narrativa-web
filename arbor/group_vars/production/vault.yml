@@ -7,7 +7,7 @@ vault_users:
     password: dqzNy-@6MtNZ8vFmmsjvG3@sdnnfJQB@Ztx2R8vh*PjTxgd-oWNp9asepruch9UR
     salt: 1hiqbbtuHj3JcDZYjLpevlWWjtrPzSPB6hF7v6qELYH22PaABUZv7yuf2pNVjQdS
 vault_wordpress_sites:
-  la-narrativa.com.mx:
+  lanarrativa.mx:
     admin_password: 6bMNqBw!vXP123qeY*rAANQ6g7nXchoTuvzp<zfasds9HdNzVBQr_x6K@-yN!Ff-
     env:
       db_password: i5KKy5regujCJBTeGNvj

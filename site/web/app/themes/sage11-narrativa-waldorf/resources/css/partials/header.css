@@ -1,0 +1,96 @@
+.nav-link {
+  @apply inline-block w-full cursor-pointer p-4 px-2.5  no-underline transition-colors lg:bg-transparent ;
+}
+
+.menu-item > .nav-link > span > svg {
+  @apply -rotate-90 sm:rotate-0;
+}
+
+.menu-item.toggled > .nav-link > span > svg {
+  @apply -rotate-180 sm:rotate-0;
+}
+
+.menu-item.active:not(.current-menu-ancestor):not(.current-product-ancestor)
+  > .nav-link {
+  @apply text-primary-500;
+}
+
+.list-level-0 {
+  @apply lg:absolute lg:top-[calc(100%+1px)];
+}
+
+.menu-item-level-0 > .nav-link {
+  @apply flex items-center justify-start gap-1 py-6  tracking-widest lg:py-4;
+}
+
+/* .menu-item-level-0:last-child > .nav-link {
+  @apply flex items-center justify-center gap-1 py-6 font-bold tracking-widest;
+} */
+
+.menu-item-level-1,
+.list-level-1 {
+  /* @apply divide-primary-300 lg:divide-y; */
+
+  .nav-link {
+    @apply px-4 py-2;
+  }
+}
+
+.menu-item-level-1 {
+  @apply mb-8 lg:mb-0;
+
+  > .nav-link {
+    @apply text-xs tracking-wider lg:text-lg lg:tracking-normal lg:normal-case;
+  }
+}
+
+.toggled > .nav-link {
+  @apply text-primary-500;
+}
+
+/* .cta {
+  @apply flex items-center;
+}
+.cta .nav-link {
+  @apply btn btn-primary px-4;
+} */
+
+.mobile-menu {
+  li {
+    @apply list-none;
+  }
+
+  ul {
+    @apply p-0;
+  }
+
+  .menu > li {
+    @apply space-y-6 px-4 py-6;
+
+    > a {
+      @apply text-primary-900 block font-medium;
+    }
+  }
+
+  .sub-menu {
+    @apply mt-6 ml-2 flex w-full flex-col space-y-6;
+
+    > li {
+      @apply flow-root;
+
+      > a {
+        @apply text-primary-900 -m-2 block p-2;
+      }
+    }
+  }
+
+  .sub-menu .sub-menu li {
+    a {
+      @apply text-primary-900;
+    }
+
+    &.current-menu-item a {
+      @apply font-medium;
+    }
+  }
+}

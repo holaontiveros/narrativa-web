@@ -2,11 +2,11 @@
 # Documentation: https://roots.io/trellis/docs/wordpress-sites/
 
 wordpress_sites:
-  la-narrativa.com.mx:
+  lanarrativa.mx:
     site_hosts:
-      - canonical: la-narrativa.com.mx
+      - canonical: lanarrativa.mx
         redirects:
-          - www.la-narrativa.com.mx
+          - www.lanarrativa.mx
     local_path: ../site
     branch: main
     repo: git@github.com:holaontiveros/saag-web.git

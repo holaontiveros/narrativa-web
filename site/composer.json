@@ -32,17 +32,32 @@
         "wp-plugin/*",
         "wp-theme/*"
       ]
-    }
+    },
+    {
+			"type": "composer",
+			"url": "https://composer.elementor.com",
+			"only": [
+				"elementor/elementor-pro"
+			]
+		}
   ],
   "require": {
     "php": ">=8.3",
     "composer/installers": "^2.2",
+    "elementor/elementor-pro": "^4.0",
     "oscarotero/env": "^2.1",
+    "roots/allow-svg": "^1.0",
     "roots/bedrock-autoloader": "^1.0",
     "roots/bedrock-disallow-indexing": "^2.0",
     "roots/wordpress": "6.9.4",
     "roots/wp-config": "1.0.0",
     "vlucas/phpdotenv": "^5.5",
+    "wp-plugin/elementor": "^4.0",
+    "wp-plugin/feedzy-rss-feeds": "^5.1",
+    "wp-plugin/secure-custom-fields": "^6.8",
+    "wp-plugin/wordfence": "^8.1",
+    "wp-plugin/wp-optimize": "^4.5",
+    "wp-plugin/wp-rss-aggregator": "^5.0",
     "wp-theme/twentytwentyfive": "^1.0"
   },
   "require-dev": {

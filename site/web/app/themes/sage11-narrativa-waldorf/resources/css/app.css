@@ -2,3 +2,65 @@
 @source "../../app/**/*.php";
 @source "../**/*.blade.php";
 @source "../**/*.js";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 71.25rem;
+  --breakpoint-xl: 71.25rem;
+  --container-padding: 1.25rem;
+  --font-sans: "Roboto", sans-serif;
+  --color-primary-50: #eaeafa;
+  --color-primary-100: #d5d5f6;
+  --color-primary-200: #ababed;
+  --color-primary-300: #8282e3;
+  --color-primary-400: #5858da;
+  --color-primary-500: #2e2ed1;
+  --color-primary-600: #0F0F9F;
+  --color-primary-700: #000052;
+  --color-primary-800: #121254;
+  --color-primary-900: #09092a;
+  --color-primary-950: #06061d;
+
+  --color-secondary-50: #fef6e6;
+  --color-secondary-100: #fdedce;
+  --color-secondary-200: #fbdc9d;
+  --color-secondary-300: #faca6b;
+  --color-secondary-400: #f8b93a;
+  --color-secondary-500: #f6a709;
+  --color-secondary-600: #c58607;
+  --color-secondary-700: #946405;
+  --color-secondary-800: #624304;
+  --color-secondary-900: #312102;
+  --color-secondary-950: #221701;
+}
+
+@import './partials/header.css';
+@import './partials/typography.css';
+@import './partials/buttons.css';
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.5rem; /* Default padding */
+
+  @variant sm {
+    padding-inline: 2rem;
+  }
+  @variant lg {
+    padding-inline: 4rem;
+  }
+}
+
+
+[x-cloak] { display: none !important; }
+
+
+.admin-bar .banner,.admin-bar .nav-container {
+  top: 32px;
+
+  @variant lg {
+    top: 0;
+  }
+}

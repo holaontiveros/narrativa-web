@@ -40,10 +40,14 @@
   },
   "require": {
     "php": ">=8.3",
-    "roots/acorn": "^6.0"
+    "blade-ui-kit/blade-icons": "^1.9",
+    "roots/acorn": "^6.0",
+    "roots/acorn-prettify": "^1.0"
   },
   "require-dev": {
-    "laravel/pint": "^1.20"
+    "laravel/pint": "^1.20",
+    "php-stubs/acf-pro-stubs": "^6.5",
+    "php-stubs/wordpress-stubs": "^6.9"
   },
   "suggest": {
     "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0)."
