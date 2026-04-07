@@ -8,15 +8,15 @@
   }
 
   .headline-3 {
-    @apply text-xl/none font-bold capitalize lg:text-2xl/none;
+    @apply text-xl/none font-bold lg:text-2xl/none;
   }
 
   .headline-4 {
-    @apply text-2xl font-bold capitalize lg:text-3xl/none;
+    @apply text-2xl font-bold lg:text-3xl/none;
   }
 
   .headline-5 {
-    @apply text-xl font-bold capitalize lg:text-xl;
+    @apply text-xl font-bold lg:text-xl;
   }
 
   /* .subtitle-1 {

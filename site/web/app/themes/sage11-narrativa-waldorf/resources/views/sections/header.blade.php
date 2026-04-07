@@ -8,7 +8,7 @@
 
         <div class="container relative mx-auto flex items-center justify-between gap-7 py-5 lg:py-0">
             @if (has_nav_menu('primary_navigation'))
-                <nav class="nav-primary fixed lg:relative lg:h-auto lg:w-full border-t-4 border-secondary-500 "
+                <nav class="nav-primary fixed lg:relative lg:h-auto lg:w-full border-b-4 border-secondary-500 "
                     aria-label="{{ wp_get_nav_menu_name('primary_navigation') }}">
                     <div class="nav-container fixed z-20 bg-white inset-x-0 w-full bottom-0 top-0 flex flex-col gap-2 overflow-y-scroll  px-4 py-5 pb-5 lg:relative lg:top-0 lg:flex-row lg:items-center lg:overflow-y-visible lg:bg-transparent lg:bg-none lg:px-0 lg:py-0"
                         x-data="{ selected: null }" :class="!$store.mobileMenu.open ? 'hidden lg:flex' : 'flex'"
