@@ -5,5 +5,5 @@
 
     <hr class="my-6 w-full border-t border-gray-300">
 
-    © {{ date('Y') }} {{ get_bloginfo('name') }}. All rights reserved.
+    © {{ date('Y') }} {{ get_bloginfo('name') }}. {{ __('All rights reserved.', 'sage') }}
 </footer>
