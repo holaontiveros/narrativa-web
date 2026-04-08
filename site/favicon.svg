@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 200 200" width="200" height="200"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <style>
+      .cls-1 {
+        fill: #2b2bc1;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs><rect class="cls-2" width="200" height="200"></rect><path class="cls-1" d="M22.48,18.97h52.26l68.77,128.56h.42V18.97h34.07v162.63h-51.63L56.34,52.42h-.42v129.18H22.48V18.97Z"></path></svg>
