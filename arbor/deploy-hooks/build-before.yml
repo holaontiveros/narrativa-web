@@ -32,10 +32,10 @@
 
 - name: Entrypoints missing
   ansible.builtin.fail:
-    msg: "The theme is missing the build manifest file"
+    msg: "The theme is missing the public/build/entrypoints.json file"
   when: not entrypoints_data.stat.exists
 
-- name: Copy compiled assets
+- name: Copy production assets
   synchronize:
     src: "{{ project_local_path }}/web/app/themes/sage11-narrativa-waldorf/public"
     dest: "{{ deploy_helper.new_release_path }}/web/app/themes/sage11-narrativa-waldorf"

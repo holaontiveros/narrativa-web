@@ -7,8 +7,6 @@
 - name: Test Connection
   hosts: web:&{{ env }}
   gather_facts: false
-  vars:
-    dynamic_user: false
   roles:
     - { role: connection, tags: [connection, always] }
 
@@ -20,7 +18,16 @@
       ansible.builtin.shell:
         cmd: |
           # exit code 1 when failed and text is domainName: This value already exists. \n siteUser: This value already exists.
-          # exit code 0 when success and text is Site www.domain.com has been added.
-          clpctl site:add:php --domainName=www.domain.com --phpVersion=8.2 --vhostTemplate='Generic' --siteUser=john --siteUserPassword='!secretPassword!'
-        changed_when: "'site was added' in result.stdout"
-        failed_when: "result.rc == 1 and 'different text' in result.stdout"
+          # exit code 0 when success reand text is Site www.domain.com has been added.
+          clpctl site:add:php --domainName={{ site }} --phpVersion=8.3 --vhostTemplate='WP-nomulti' --siteUser={{ web_user }} --siteUserPassword='{{ vault_wordpress_sites[item.key].admin_password }}'
+      loop: "{{ wordpress_sites | dict2items }}"
+      loop_control:
+        label: "{{ item.key }}"
+      register: site_config_result
+      failed_when: 
+        - site_config_result.rc != 0
+        - "'This value already exists' not in site_config_result.stdout"
+      changed_when: "'has been added' in site_config_result.stdout"
+  roles:
+    - { role: users, tags: [users] }
+    

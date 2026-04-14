@@ -9,8 +9,14 @@ vault_users:
 vault_wordpress_sites:
   lanarrativa.mx:
     admin_password: 6bMNqBw!vXP123qeY*rAANQ6g7nXchoTuvzp<zfasds9HdNzVBQr_x6K@-yN!Ff-
+    composer_authentications:
+      - {
+          hostname: composer.elementor.com,
+          username: token,
+          password: ep-vP8aXTesgm70pRqCq3fd1615579388HYIVrlLwD1EO,
+        }
     env:
-      db_password: i5KKy5regujCJBTeGNvj
+      db_password: xTZWMVBjVgx8MML9n53b
       db_name: la-narrativa
       db_host: private-db-mysql-nyc3-97063-do-user-1520713-0.j.db.ondigitalocean.com:25060
       db_user: la-narrativa

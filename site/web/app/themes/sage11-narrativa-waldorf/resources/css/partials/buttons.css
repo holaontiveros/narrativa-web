@@ -1,6 +1,7 @@
 .btn,
 .nav-links a,
-.cta .nav-link {
+.cta .nav-link,
+.elementor-button {
   @apply inline-flex cursor-pointer items-center justify-center gap-x-3 rounded-none px-6 py-3 text-lg leading-6 font-bold tracking-widest uppercase no-underline transition-colors disabled:pointer-events-none;
 
   i {
@@ -14,7 +15,8 @@
 
 .btn-primary,
 .nav-links a,
-.cta .nav-link {
+.cta .nav-link,
+.elementor-button {
   @apply border-primary-500 bg-primary-500 hover:border-primary-700 hover:bg-primary-700 text-white visited:text-white;
 
   i {

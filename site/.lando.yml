@@ -2,6 +2,7 @@ name: la-narrativa
 recipe: wordpress
 config:
   webroot: web
+  database: mysql:8.0
 services:
   appserver:
     type: php:8.3 # Bedrock requires PHP >= 8.3

@@ -11,10 +11,10 @@ Arbor is a mini-version of the [Roots Trellis](https://roots.io/trellis/) projec
 - Integrate uploads sync script
 - Change vhost template for cloud panel to prevent wordpress error with bedrock paths
 - Add scripts to configure site on cloud panel
-  - create site
+  <!-- - create site -->
   - add ssh key
   - set root folder to new `current/web`
-  - allow php reload without sudo `vwcamionespeninsular ALL=(root) NOPASSWD: /usr/sbin/service php8.2-fpm *`
+  <!-- - allow php reload without sudo `vwcamionespeninsular ALL=(root) NOPASSWD: /usr/sbin/service php8.2-fpm *` -->
   - ~~add after template hooks~~
 
 ## Features ✨

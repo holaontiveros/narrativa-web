@@ -9,7 +9,7 @@ wordpress_sites:
           - www.lanarrativa.mx
     local_path: ../site
     branch: main
-    repo: git@github.com:holaontiveros/saag-web.git
+    repo: git@github.com:holaontiveros/narrativa-web.git
     repo_subtree_path: site
     multisite:
       enabled: false

@@ -10,15 +10,15 @@
 #   command: wp acorn optimize
 #   args:
 #     chdir: "{{ deploy_helper.new_release_path }}"
-- name: Enable wp redis object cache
-  command: wp redis enable
-  args:
-    chdir: "{{ deploy_helper.new_release_path }}"
-- name: Flush wp optimize cache
-  command: wp eval 'wpo_cache_flush();'
-  args:
-    chdir: "{{ deploy_helper.new_release_path }}"
-- name: Clear Varnish cache
-  command: clpctl varnish-cache:purge --purge=all
-  args:
-    chdir: "{{ deploy_helper.new_release_path }}"
+# - name: Enable wp redis object cache
+#   command: wp redis enable
+#   args:
+#     chdir: "{{ deploy_helper.new_release_path }}"
+# - name: Flush wp optimize cache
+#   command: wp eval 'wpo_cache_flush();'
+#   args:
+#     chdir: "{{ deploy_helper.new_release_path }}"
+# - name: Clear Varnish cache
+#   command: clpctl varnish-cache:purge --purge=all
+#   args:
+#     chdir: "{{ deploy_helper.new_release_path }}"
