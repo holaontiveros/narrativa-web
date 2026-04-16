@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84dfd4ca82f806c809ce7dfbb04ed358",
+    "content-hash": "9b5699c6d132807522c299f18dc493e7",
     "packages": [
         {
             "name": "composer/installers",
@@ -1294,37 +1294,6 @@
                 "source": "https://plugins.svn.wordpress.org/wp-optimize"
             },
             "time": "2026-03-25T10:46:35+00:00"
-        },
-        {
-            "name": "wp-plugin/wp-rss-aggregator",
-            "version": "5.0.12",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-rss-aggregator/",
-                "reference": "tags/5.0.12"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-rss-aggregator.5.0.12.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0|~2.0"
-            },
-            "type": "wordpress-plugin",
-            "notification-url": "https://wp-packages.org/downloads",
-            "authors": [
-                {
-                    "name": "RebelCode"
-                }
-            ],
-            "description": "The #1 WordPress RSS aggregator to quickly import RSS feeds, build a news aggregator, and for easy autoblogging.",
-            "homepage": "https://wprssaggregator.com",
-            "support": {
-                "changelog": "https://wordpress.org/plugins/wp-rss-aggregator/#developers",
-                "issues": "https://wordpress.org/support/plugin/wp-rss-aggregator",
-                "source": "https://plugins.svn.wordpress.org/wp-rss-aggregator"
-            },
-            "time": "2026-03-23T19:23:21+00:00"
         },
         {
             "name": "wp-theme/twentytwentyfive",
