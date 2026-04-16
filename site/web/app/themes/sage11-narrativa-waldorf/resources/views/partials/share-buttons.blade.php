@@ -4,8 +4,7 @@
         <h3 class="text-lg font-semibold text-gray-900">Compartir en redes</h3>
         <div class="flex items-center gap-3">
             {{-- Native Share (when available) --}}
-            <button onclick="window.useNativeShare()
-                    id="native-share-btn" style="display: none;"
+            <button onclick="window.useNativeShare()" id="native-share-btn" style="display: none;"
                 class="pointer inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-800 hover:text-white transition-all duration-200 hover:scale-110"
                 title="Share">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
