@@ -25,6 +25,8 @@
 
             <div class="mx-auto max-w-3xl">
                 @include('partials.entry-meta')
+                @include('partials.share-buttons')
+
 
                 @php(comments_template())
 
