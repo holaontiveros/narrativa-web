@@ -20,7 +20,6 @@ add_filter('excerpt_length', function () {
 }, 999);
 
 
-
 add_filter('acf/settings/save_json', function ($path) {
     $path = get_stylesheet_directory() . '/app/acf-json';
     return $path;

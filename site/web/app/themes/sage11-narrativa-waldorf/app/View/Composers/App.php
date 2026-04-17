@@ -32,4 +32,10 @@ class App extends Composer
 
         return wp_get_attachment_image(get_field('default_featured_image', 'option'), 'full', false, ['class' => $classes]);
     }
+
+    public function getSocialLinks(): array
+    {
+        $social_links = get_field('networks', 'option');
+        return $social_links ? $social_links : [];
+    }
 }
