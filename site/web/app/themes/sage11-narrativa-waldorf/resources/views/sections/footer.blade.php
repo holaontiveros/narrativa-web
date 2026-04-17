@@ -8,9 +8,7 @@
                 <div class="flex">
                     @foreach ($getSocialLinks() as $social)
                         <a href="{{ $social['link'] }}" target="_blank" class="inline-block mr-4">
-                            <div class="bg-primary-500 rounded-full p-1">
-                                <img src="{{ $social['icon'] }}" alt="Social Icon" class="w-6 h-6 invert">
-                            </div>
+                            <img src="{{ $social['icon'] }}" alt="Social Icon" class="w-6 h-6">
                         </a>
                     @endforeach
                 </div>
