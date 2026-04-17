@@ -43,21 +43,26 @@
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 1.5rem; /* Default padding */
+  padding-inline: 1.5rem;
+  /* Default padding */
 
   @variant sm {
     padding-inline: 2rem;
   }
+
   @variant lg {
     padding-inline: 4rem;
   }
 }
 
 
-[x-cloak] { display: none !important; }
+[x-cloak] {
+  display: none !important;
+}
 
 
-.admin-bar .banner,.admin-bar .nav-container {
+.admin-bar .banner,
+.admin-bar .nav-container {
   top: 32px;
 
   @variant lg {
@@ -83,4 +88,9 @@
     width: 100%;
     height: 100%;
   }
+}
+
+
+.nav-links {
+  @apply flex flex-wrap gap-4 justify-center mt-8;
 }

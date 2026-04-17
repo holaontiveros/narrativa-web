@@ -21,8 +21,11 @@
     </div>
 
 
-    <div class="container mx-auto mt-6">
-        {!! get_the_posts_navigation() !!}
+    <div class="container mx-auto mt-8">
+        {!! get_the_posts_navigation([
+            'prev_text' => __('Previous', 'sage'),
+            'next_text' => __('Next', 'sage'),
+        ]) !!}
     </div>
 @endsection
 
