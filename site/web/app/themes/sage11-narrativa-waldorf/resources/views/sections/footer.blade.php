@@ -1,4 +1,4 @@
-<footer class="content-info bg-gray-100 py-8">
+<footer class="content-info bg-gray-100 py-8 mt-8">
     <div class="container mx-auto flex flex-col items-center">
         <div class="flex flex-wrap justify-between items-center w-full">
             <div class="w-full lg:w-60 mb-4 lg:mb-0">
