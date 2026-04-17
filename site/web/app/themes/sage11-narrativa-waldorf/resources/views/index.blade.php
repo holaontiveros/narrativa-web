@@ -13,7 +13,7 @@
         {{-- {!! get_search_form(false) !!} --}}
     @endif
 
-    <div class="container flex flex-wrap md:flex-nowrap gap-6 mx-auto">
+    <div class="container flex flex-wrap mx-auto">
         @while (have_posts())
             @php(the_post())
             @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])

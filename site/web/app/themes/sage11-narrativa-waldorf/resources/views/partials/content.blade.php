@@ -1,4 +1,4 @@
-<article @php(post_class('w-full lg:w-1/3 flex flex-col gap-4'))>
+<article @php(post_class('w-full lg:basis-1/3 py-3 px-4 flex flex-col gap-4'))>
     <header>
         <a href="{{ get_permalink() }}" class="block mb-6">
             {!! $getFeaturedImage(0, 'aspect-video object-cover') !!}
