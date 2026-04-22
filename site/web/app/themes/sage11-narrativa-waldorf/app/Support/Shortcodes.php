@@ -118,18 +118,11 @@ class Shortcodes
 
         $posts = get_posts([
             'tag' => 'featured',
-            'numberposts' => 3,
-            'orderby' => 'rand',
+            'numberposts' => 2,
             'post__not_in' => $main_post ? [$main_post[0]->ID] : [],
             'orderby'        => 'date',
             'order'          => 'DESC',
         ]);
-
-        if(!count($main_post)) {
-            $main_post = array_shift($posts);
-        } else {
-            array_shift($posts);
-        }
 
         $main_post = $main_post ? $main_post[0] : null;
 
