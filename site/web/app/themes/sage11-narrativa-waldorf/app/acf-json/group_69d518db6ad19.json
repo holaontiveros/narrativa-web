@@ -112,26 +112,28 @@
             "label": "Imagen destacada default para post",
             "name": "default_featured_image",
             "aria-label": "",
-            "type": "image",
+            "type": "gallery",
             "instructions": "",
-            "required": 0,
+            "required": false,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "return_format": "id",
+            "return_format": "array",
+            "preview_size": "medium",
+            "insert": "append",
             "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
+            "min": 0,
+            "max": 0,
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
         }
     ],
     "location": [
@@ -153,5 +155,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1776441918
+    "modified": 1776865647
 }

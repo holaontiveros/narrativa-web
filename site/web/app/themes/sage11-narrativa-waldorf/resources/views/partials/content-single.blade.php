@@ -1,4 +1,4 @@
-        {!! $getFeaturedImage($post, 'w-full h-75 object-cover mb-6') !!}
+        {!! $getFeaturedImage($post, 'w-full h-75 object-contain mb-6') !!}
 
         <article @php(post_class('h-entry'))>
             <div class="prose mx-auto max-w-3xl">
@@ -26,7 +26,6 @@
             <div class="mx-auto max-w-3xl">
                 @include('partials.entry-meta')
                 @include('partials.share-buttons')
-
 
                 @php(comments_template())
 

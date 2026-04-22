@@ -104,12 +104,36 @@ class Shortcodes
     public function featured_posts($atts, $content = null)
     {
         // gets ramdom posts with "featured" tag, you can change it to your needs
+
+
+        $mexicoCategory = get_category_by_slug('mexico');
+
+        $main_post = get_posts([
+            'tag' => 'featured',
+            'numberposts' => 1,
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+            'category' => $mexicoCategory ? $mexicoCategory->term_id : null,
+        ]);
+
         $posts = get_posts([
             'tag' => 'featured',
             'numberposts' => 3,
             'orderby' => 'rand',
+            'post__not_in' => $main_post ? [$main_post[0]->ID] : [],
+            'orderby'        => 'date',
+            'order'          => 'DESC',
         ]);
-        return $this->get_template_content('shortcodes/featured-posts', ['posts' => $posts]);
+
+        if(!count($main_post)) {
+            $main_post = array_shift($posts);
+        } else {
+            array_shift($posts);
+        }
+
+        $main_post = $main_post ? $main_post[0] : null;
+
+        return $this->get_template_content('shortcodes/featured-posts', ['posts' => $posts, 'mainPost' => $main_post]);
     }
 
 
