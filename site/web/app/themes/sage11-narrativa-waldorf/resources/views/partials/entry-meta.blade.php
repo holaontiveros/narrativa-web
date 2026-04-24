@@ -14,8 +14,8 @@
             </a>
         </p>
 
-        <time class="dt-published" datetime="{{ get_post_time('c', true) }}">
-            {{ get_the_date() }}
+        <time class="dt-published" datetime="{{ get_post_time('c', true, $post) }}">
+            {{ get_the_date('', $post) }}
         </time>
 
     </div>

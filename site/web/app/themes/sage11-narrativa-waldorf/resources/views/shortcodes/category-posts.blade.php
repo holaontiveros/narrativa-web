@@ -10,10 +10,17 @@
         @endif
         <div class="flex flex-wrap md:flex-nowrap gap-8">
             @while ($query->have_posts())
-                @php($query->the_post())
+                @php
+                    $query->the_post();
+                    global $post;
+                    setup_postdata($post);
+                @endphp
                 @include('partials.content')
             @endwhile
-            @php(wp_reset_postdata())
+
+            @php
+                wp_reset_postdata();
+            @endphp
         </div>
     </div>
 @endif

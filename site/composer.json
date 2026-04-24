@@ -53,8 +53,10 @@
     "roots/wp-config": "1.0.0",
     "vlucas/phpdotenv": "^5.5",
     "wp-plugin/elementor": "^4.0",
+    "wp-plugin/featured-image-from-youtube": "^1.6",
     "wp-plugin/feedzy-rss-feeds": "^5.1",
     "wp-plugin/secure-custom-fields": "^6.8",
+    "wp-plugin/seo-by-rank-math": "^1.0",
     "wp-plugin/wordfence": "^8.1",
     "wp-plugin/wp-optimize": "^4.5",
     "wp-theme/twentytwentyfive": "^1.0"
