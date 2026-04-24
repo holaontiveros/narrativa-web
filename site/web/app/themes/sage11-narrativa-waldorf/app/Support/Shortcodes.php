@@ -107,6 +107,7 @@ class Shortcodes
 
 
         $mexicoCategory = get_category_by_slug('mexico');
+        $internationalCategory = get_category_by_slug('internacional');
 
         $main_post = get_posts([
             'tag' => 'featured',
@@ -116,15 +117,34 @@ class Shortcodes
             'category' => $mexicoCategory ? $mexicoCategory->term_id : null,
         ]);
 
+        if (empty($main_post)) {
+            $main_post = get_posts([
+                'numberposts' => 1,
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+                'category' => $mexicoCategory ? $mexicoCategory->term_id : null,
+            ]);
+        }
+        $main_post = $main_post ? $main_post[0] : null;
+
+
         $posts = get_posts([
             'tag' => 'featured',
             'numberposts' => 2,
-            'post__not_in' => $main_post ? [$main_post[0]->ID] : [],
+            'post__not_in' => $main_post ? [$main_post->ID] : [],
             'orderby'        => 'date',
             'order'          => 'DESC',
         ]);
 
-        $main_post = $main_post ? $main_post[0] : null;
+        if (empty($posts)) {
+            $posts = get_posts([
+                'numberposts' => 2,
+                'post__not_in' => $main_post ? [$main_post->ID] : [],
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+                'category' => $internationalCategory ? $internationalCategory->term_id : null,
+            ]);
+        }
 
         return $this->get_template_content('shortcodes/featured-posts', ['posts' => $posts, 'mainPost' => $main_post]);
     }
