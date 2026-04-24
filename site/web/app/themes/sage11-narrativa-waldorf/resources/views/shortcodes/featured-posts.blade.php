@@ -1,6 +1,6 @@
 @props(['posts', 'mainPost'])
 
-@if (count($posts))
+@if (count($posts) || $mainPost)
     <div class="featured-posts flex flex-wrap md:flex-nowrap gap-6">
             <div class="w-full lg:w-6/12">
                 @include('partials.fetaured-big', ['post' => $mainPost])
