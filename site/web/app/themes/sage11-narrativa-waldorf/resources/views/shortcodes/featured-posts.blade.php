@@ -7,12 +7,13 @@
             @include('partials.fetaured-big', ['post' => $mainPost])
         </div>
         <div class="w-full lg:w-6/12 flex flex-col gap-6">
-            @foreach ($posts as $post)
+            @foreach ($posts as $currentPost)
                 @php
                     global $post;
-                    setup_postdata($post);
+                    $post = $currentPost;
+                    setup_postdata($currentPost);
                 @endphp
-                @include('partials.fetaured-small', ['post' => $post])
+                @include('partials.fetaured-small', ['post' => $currentPost])
             @endforeach
         </div>
     </div>
