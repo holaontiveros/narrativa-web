@@ -127,23 +127,24 @@ class Shortcodes
         }
         $main_post = $main_post ? $main_post[0] : null;
 
+        $totalPostRightSection = 2;
 
         $posts = get_posts([
             'tag' => 'featured',
-            'numberposts' => 2,
+            'numberposts' => $totalPostRightSection,
             'post__not_in' => $main_post ? [$main_post->ID] : [],
             'orderby'        => 'date',
             'order'          => 'DESC',
         ]);
 
-        if (empty($posts)) {
-            $posts = get_posts([
-                'numberposts' => 2,
-                'post__not_in' => $main_post ? [$main_post->ID] : [],
+        if(count($posts) != $totalPostRightSection) {
+            $posts = array_merge($posts, get_posts([
+                'numberposts' => $totalPostRightSection - count($posts),
+                'post__not_in' => $main_post ? array_merge([$main_post->ID], wp_list_pluck($posts, 'ID')) : wp_list_pluck($posts, 'ID'),
                 'orderby'        => 'date',
                 'order'          => 'DESC',
                 'category' => $internationalCategory ? $internationalCategory->term_id : null,
-            ]);
+            ]));
         }
 
         return $this->get_template_content('shortcodes/featured-posts', ['posts' => $posts, 'mainPost' => $main_post]);
