@@ -1,7 +1,7 @@
 <article @php(post_class('w-full lg:basis-1/3 py-3 px-4 flex flex-col gap-4'))>
     <header>
         <a href="{{ get_permalink() }}" class="block mb-6">
-            {!! $getFeaturedImage(0, 'aspect-video object-cover') !!}
+            {!! $getFeaturedImage(0, 'aspect-video object-cover w-full') !!}
         </a>
 
         <div class="font-bold text-sm mb-2">{{ get_the_category()[0]->name ?? '' }}</div>
