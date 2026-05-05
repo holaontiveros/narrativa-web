@@ -14,7 +14,7 @@
 
     </header>
 
-    <div class="entry-summary">
+    <div class="entry-summary break-all">
         @php(the_excerpt())
     </div>
 
