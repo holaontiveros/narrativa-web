@@ -1,4 +1,4 @@
-<div class="flex gap-4">
+<div class="flex gap-4 not-prose">
     {{-- User profile picture --}}
     @if (get_option('show_avatars'))
         <div class="p-author h-card">
