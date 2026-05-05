@@ -206,3 +206,121 @@ add_filter('wp_theme_json_get_style_nodes', '__return_empty_array');
  */
 remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
 remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+
+/**
+ * Plugin Name: Senior Editor Role
+ * Description: Adds a Senior Editor role with all Editor caps + restricted user management.
+ * Version: 1.0
+ */
+
+// ─── 1. Register the role on activation ──────────────────────────────────────
+
+function senior_editor_activate() {
+    // Start from Editor's capabilities as a baseline
+    $editor = get_role( 'editor' );
+    $caps   = $editor ? $editor->capabilities : [];
+
+    // Add user-management caps (we'll gate *which* users in hooks below)
+    $caps['create_users'] = true;
+    $caps['edit_users']   = true;
+    $caps['delete_users'] = true;
+    $caps['list_users']   = true;
+    $caps['promote_users'] = true; // needed for role dropdowns; filtered below
+
+    add_role( 'senior_editor', 'Senior Editor', $caps );
+}
+
+add_action( 'init', function () {
+    // Ensure the role exists (in case it was added after activation)
+    if ( ! get_role( 'senior_editor' ) ) {
+        senior_editor_activate();
+    }
+ } );
+
+
+// ─── 3. Helper: roles a Senior Editor may manage ─────────────────────────────
+
+function se_manageable_roles(): array {
+    // Any role at "editor" level or below (excludes senior_editor itself and admin)
+    return [ 'editor', 'author', 'contributor', 'subscriber' ];
+}
+
+function se_is_senior_editor( \WP_User $user = null ): bool {
+    $user = $user ?? wp_get_current_user();
+    return in_array( 'senior_editor', (array) $user->roles, true );
+}
+
+
+// ─── 4. Filter the available roles in the user-edit role dropdown ─────────────
+//    Prevents a Senior Editor from assigning senior_editor / administrator.
+
+add_filter( 'editable_roles', function ( array $roles ): array {
+    if ( ! se_is_senior_editor() ) {
+        return $roles;
+    }
+    $allowed = se_manageable_roles();
+    return array_filter( $roles, fn( $slug ) => in_array( $slug, $allowed, true ), ARRAY_FILTER_USE_KEY );
+} );
+
+
+// ─── 5. Block editing users who are at senior_editor level or above ───────────
+
+add_filter( 'user_has_cap', function ( array $allcaps, array $caps, array $args, \WP_User $user ): array {
+    // Only intercept for Senior Editors
+    if ( ! se_is_senior_editor( $user ) ) {
+        return $allcaps;
+    }
+
+    $user_management_caps = [ 'edit_user', 'delete_user', 'promote_user' ];
+    if ( ! in_array( $args[0], $user_management_caps, true ) ) {
+        return $allcaps;
+    }
+
+    // $args[2] is the target user ID
+    $target_id = $args[2] ?? 0;
+    if ( ! $target_id || $target_id === $user->ID ) {
+        return $allcaps; // editing own profile is always fine
+    }
+
+    $target      = get_userdata( $target_id );
+    $target_role = $target ? (array) $target->roles : [];
+    $allowed     = se_manageable_roles();
+
+    // If the target has ANY role outside the allowed list → deny
+    $has_elevated = (bool) array_diff( $target_role, $allowed );
+    if ( $has_elevated ) {
+        $allcaps[ $args[0] ] = false;
+        // Also zero out the primitive caps that were mapped
+        foreach ( $caps as $cap ) {
+            $allcaps[ $cap ] = false;
+        }
+    }
+
+    return $allcaps;
+}, 10, 4 );
+
+
+// ─── 6. Restrict the Users list table to show only manageable users ───────────
+
+add_action( 'pre_get_users', function ( \WP_User_Query $query ): void {
+    if ( ! se_is_senior_editor() ) {
+        return;
+    }
+    // Limit results to allowed roles so Senior Editors can't even *see* admins
+    $query->set( 'role__in', se_manageable_roles() );
+} );
+
+
+// ─── 7. Block new-user creation with a disallowed role via POST ───────────────
+
+add_action( 'user_register', function ( int $user_id ): void {
+    if ( ! se_is_senior_editor() ) {
+        return;
+    }
+    $role = $_POST['role'] ?? ''; // phpcs:ignore WordPress.Security.NonceVerification
+    if ( $role && ! in_array( $role, se_manageable_roles(), true ) ) {
+        // Downgrade to subscriber if someone bypassed the dropdown filter
+        $user = new \WP_User( $user_id );
+        $user->set_role( 'subscriber' );
+    }
+} );
