@@ -163,11 +163,38 @@ class Shortcodes
     {
         $title = isset($atts['title']) ? esc_html($atts['title']) : null;
         $category = isset($atts['category']) ? esc_html($atts['category']) : null;
+        $tag_for_main_posts = get_term_by('slug', 'principal', 'post_tag'); // Assuming "principal" is the slug of the tag you want to prioritize
         $amount = isset($atts['amount']) ? intval($atts['amount']) : 3;
+
+        // Fetch posts with the specified category and tag, which also includes those tagged as "principal"
         $post_query = new WP_Query([
             'category_name' => $category,
             'posts_per_page' => $amount,
+            'tag__in' => [$tag_for_main_posts ? $tag_for_main_posts->term_id : 0],
+            'fields' => 'ids', // Only fetch post IDs for performance
         ]);
-        return $this->get_template_content('shortcodes/category-posts', ['query' => $post_query, 'main_title' => $title]);
+
+        $postIds = $post_query->posts;
+
+        if($post_query->found_posts < $amount) {
+            // If there are not enough posts with the "principal" tag, fetch additional posts without the tag
+            $additional_posts_query = new WP_Query([
+                'category_name' => $category,
+                'posts_per_page' => $amount - $post_query->found_posts,
+                'tag__not_in' => [$tag_for_main_posts ? $tag_for_main_posts->term_id : 0],
+                'post__not_in' => $postIds, // Exclude already fetched posts
+                'fields' => 'ids', // Only fetch post IDs for performance
+            ]);
+
+            // Merge the two queries
+            $postIds = array_merge($postIds, $additional_posts_query->posts);
+        }
+
+        $final_query = new WP_Query([
+            'post__in' => $postIds,
+            'orderby' => 'post__in', // Preserve the order of IDs
+        ]);
+
+        return $this->get_template_content('shortcodes/category-posts', ['query' => $final_query, 'main_title' => $title]);
     }
 }
