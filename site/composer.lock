@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "881934962120049e8493ed2bc20720c6",
+    "content-hash": "6632c9aa16f078e33605b1251cf16670",
     "packages": [
         {
             "name": "composer/installers",
@@ -1139,6 +1139,37 @@
                 }
             ],
             "time": "2025-12-27T19:49:13+00:00"
+        },
+        {
+            "name": "wp-plugin/automatic-featured-images-from-videos",
+            "version": "1.2.8",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/automatic-featured-images-from-videos/",
+                "reference": "tags/1.2.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/automatic-featured-images-from-videos.1.2.8.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "webdevstudios"
+                }
+            ],
+            "description": "If a YouTube or Vimeo video embed exists near the start of a post, we'll automatically set the post's featured image to a thumbnail of the video.",
+            "homepage": "https://webdevstudios.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/automatic-featured-images-from-videos/#developers",
+                "issues": "https://wordpress.org/support/plugin/automatic-featured-images-from-videos",
+                "source": "https://plugins.svn.wordpress.org/automatic-featured-images-from-videos"
+            },
+            "time": "2026-03-23T19:23:21+00:00"
         },
         {
             "name": "wp-plugin/elementor",

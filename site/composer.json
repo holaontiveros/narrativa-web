@@ -52,6 +52,7 @@
     "roots/wordpress": "6.9.4",
     "roots/wp-config": "1.0.0",
     "vlucas/phpdotenv": "^5.5",
+    "wp-plugin/automatic-featured-images-from-videos": "^1.2",
     "wp-plugin/elementor": "^4.0",
     "wp-plugin/featured-image-from-youtube": "^1.6",
     "wp-plugin/feedzy-rss-feeds": "^5.1",
