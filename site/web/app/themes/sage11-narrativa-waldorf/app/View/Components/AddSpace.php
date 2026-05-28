@@ -25,11 +25,13 @@ class AddSpace extends Component
     {
         // Possible scopes: site, category, post
         // Possible ad spaces: footer, main_featured, post_start, cat_start
-        // ad_spaces has [location, scope, banner, post => [], tax => [] ]
+        // ad_spaces has [location => [], scope, banner, post => [], tax => [] ]
         $adSpaces = collect(get_field('ad_spaces', 'option'));
         // Get the right adSpace taking in account scope overrides
         $adSpacesForLocation = $adSpaces
-            ->where('location', $this->spaceId);
+            ->filter(function ($adSpace) {
+                return in_array($this->spaceId, (array) ($adSpace['location'] ?? []));
+            });
 
         $selectedAdSpace = null;
 

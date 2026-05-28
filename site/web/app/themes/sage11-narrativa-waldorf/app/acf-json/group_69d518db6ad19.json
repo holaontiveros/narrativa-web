@@ -337,9 +337,9 @@
                     "label": "Ubicación",
                     "name": "location",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "checkbox",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -352,13 +352,16 @@
                         "post_start": "Inicio de post",
                         "cat_start": "Inicio de categoría"
                     },
-                    "default_value": "footer",
+                    "default_value": [
+                        "footer"
+                    ],
                     "return_format": "value",
-                    "allow_null": 0,
-                    "other_choice": 0,
+                    "allow_custom": 0,
                     "allow_in_bindings": 0,
                     "layout": "vertical",
-                    "save_other_choice": 0,
+                    "toggle": 0,
+                    "save_custom": 0,
+                    "custom_choice_button_text": "Añadir nueva opción",
                     "parent_repeater": "field_6a17574989a43"
                 }
             ]
@@ -385,5 +388,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1779995641
+    "modified": 1780001812
 }
