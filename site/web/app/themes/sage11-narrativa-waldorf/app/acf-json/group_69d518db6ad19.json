@@ -182,7 +182,34 @@
                     "aria-label": "",
                     "type": "image",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "id",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium",
+                    "parent_repeater": "field_6a17574989a43"
+                },
+                {
+                    "key": "field_6a1893e439522",
+                    "label": "Banner móvil",
+                    "name": "banner_mobile",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -356,5 +383,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779917255
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1779995641
 }

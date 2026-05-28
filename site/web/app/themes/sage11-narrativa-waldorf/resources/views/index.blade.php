@@ -31,6 +31,10 @@
             'next_text' => __('Next', 'sage'),
         ]) !!}
     </div>
+
+    <div class="container mt-12">
+        <x-add-space :space-id="'footer'"/>
+    </div>
 @endsection
 
 @section('sidebar')

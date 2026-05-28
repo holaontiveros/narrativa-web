@@ -80,7 +80,8 @@ class AddSpace extends Component
         }
 
         return view('components.add-space', [
-            'bannerId' => $selectedAdSpace['banner'] ?? null,
+            'bannerIdDesktop' => $selectedAdSpace['banner'] ?? null,
+            'bannerIdMobile' => $selectedAdSpace['banner_mobile'] ?? null,
         ]);
     }
 }
