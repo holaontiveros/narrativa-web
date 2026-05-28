@@ -7,6 +7,8 @@
             @include('partials.fetaured-big', ['post' => $mainPost])
         </div>
         <div class="w-full lg:w-6/12 flex flex-col gap-6">
+          <x-add-space space-id="main_featured" />
+
             @foreach ($posts as $currentPost)
                 @php
                     global $post;

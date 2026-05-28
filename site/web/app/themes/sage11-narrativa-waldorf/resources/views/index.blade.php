@@ -3,6 +3,10 @@
 @section('content')
     @include('partials.page-header')
 
+    <div class="container mb-12">
+        <x-add-space :space-id="'cat_start'"/>
+    </div>
+
     @if (!have_posts())
         <div class="container mx-auto flex flex-col items-center justify-center py-12">
             <h1 class="text-4xl font-bold mb-4">Sin contenido</h1>
