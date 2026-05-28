@@ -9,7 +9,7 @@
         </div>
 
         {!! wp_get_attachment_image($bannerIdDesktop, 'full', false, [
-            'class' => 'hidden md:block w-242 h-60 object-cover object-center opacity-0 transition-opacity duration-300',
+            'class' => 'hidden md:block w-232 h-45 object-cover object-center opacity-0 transition-opacity duration-300',
             'loading' => 'lazy',
             'decoding' => 'async',
             'onload' => "this.style.opacity='1';this.closest('[data-add-space]')?.querySelector('[data-add-space-loader]')?.remove();",
@@ -17,7 +17,7 @@
         ]) !!}
 
         {!! wp_get_attachment_image($bannerIdMobile, 'full', false, [
-            'class' => 'block md:hidden w-75 h-22.5 object-cover object-center opacity-0 transition-opacity duration-300',
+            'class' => 'block md:hidden w-75 h-25 object-cover object-center opacity-0 transition-opacity duration-300',
             'loading' => 'lazy',
             'decoding' => 'async',
             'onload' => "this.style.opacity='1';this.closest('[data-add-space]')?.querySelector('[data-add-space-loader]')?.remove();",
