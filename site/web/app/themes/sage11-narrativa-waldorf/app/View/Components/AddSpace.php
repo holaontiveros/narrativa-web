@@ -81,9 +81,13 @@ class AddSpace extends Component
                 ->first();
         }
 
+        $adType = $selectedAdSpace['ad_type'] ?? 'image';
+
         return view('components.add-space', [
+            'adType' => $adType,
             'bannerIdDesktop' => $selectedAdSpace['banner'] ?? null,
             'bannerIdMobile' => $selectedAdSpace['banner_mobile'] ?? null,
+            'htmlBody' => $selectedAdSpace['html_body'] ?? null,
         ]);
     }
 }
