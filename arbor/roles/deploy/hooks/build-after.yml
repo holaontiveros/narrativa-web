@@ -14,7 +14,7 @@
     command: config
     arguments: --auth http-basic.{{ item.hostname | quote }} {{ item.username | quote }} {{ item.password | default("") | quote }}
     working_dir: "{{ deploy_helper.new_release_path }}"
-  no_log: false
+  no_log: true
   changed_when: false
   when:
     - item.hostname is defined and item.hostname != ""
