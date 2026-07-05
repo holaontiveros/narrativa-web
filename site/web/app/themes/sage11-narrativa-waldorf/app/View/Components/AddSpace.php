@@ -24,64 +24,78 @@ class AddSpace extends Component
     public function render(): View|Closure|string
     {
         // Possible scopes: site, category, post
-        // Possible ad spaces: footer, main_featured, post_start, cat_start
-        // ad_spaces has [location => [], scope, banner, post => [], tax => [] ]
-        $adSpaces = collect(get_field('ad_spaces', 'option'));
-        // Get the right adSpace taking in account scope overrides
-        $adSpacesForLocation = $adSpaces
-            ->filter(function ($adSpace) {
-                return in_array($this->spaceId, (array) ($adSpace['location'] ?? []));
+        // Possible ad locations: footer, main_featured, post_start, cat_start
+        // Each `ad` CPT post has: ad_type, scope, post (rel), tax, location[], ad_spaces (repeater).
+        $adPosts = get_posts([
+            'post_type' => 'ad',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'no_found_rows' => true,
+        ]);
+
+        $ads = collect($adPosts)
+            ->map(function ($post) {
+                return [
+                    'id' => $post->ID,
+                    'ad_type' => get_field('ad_type', $post->ID),
+                    'scope' => get_field('scope', $post->ID),
+                    'posts' => (array) (get_field('post', $post->ID) ?: []),
+                    'tax' => (array) (get_field('tax', $post->ID) ?: []),
+                    'location' => (array) (get_field('location', $post->ID) ?: []),
+                    'ad_spaces' => (array) (get_field('ad_spaces', $post->ID) ?: []),
+                ];
+            })
+            ->filter(function ($ad) {
+                return in_array($this->spaceId, $ad['location']);
             });
 
-        $selectedAdSpace = null;
+        $selectedAd = null;
 
-        if(is_single()) {
+        if (is_single()) {
             $postId = get_the_ID();
-            $selectedAdSpace = $adSpacesForLocation
+            $postMatches = $ads
                 ->where('scope', 'post')
-                ->filter(function ($adSpace) use ($postId) {
-                    return in_array($postId, (array) $adSpace['post']);
-                })
-                ->first();
+                ->filter(function ($ad) use ($postId) {
+                    return in_array($postId, $ad['posts']);
+                });
+            $selectedAd = $postMatches->isNotEmpty() ? $postMatches->random() : null;
 
-            if (!$selectedAdSpace) {
-                $categories = get_the_category($postId);
-                $categoryIds = wp_list_pluck($categories, 'term_id');
+            if (!$selectedAd) {
+                $categoryIds = wp_list_pluck(get_the_category($postId), 'term_id');
 
-                $selectedAdSpace = $adSpacesForLocation
+                $categoryMatches = $ads
                     ->where('scope', 'category')
-                    ->filter(function ($adSpace) use ($categoryIds) {
-                        return !empty(array_intersect((array) ($adSpace['tax'] ?? []), (array) $categoryIds));
-                    })
-                    ->first();
+                    ->filter(function ($ad) use ($categoryIds) {
+                        return !empty(array_intersect($ad['tax'], (array) $categoryIds));
+                    });
+                $selectedAd = $categoryMatches->isNotEmpty() ? $categoryMatches->random() : null;
             }
 
-            if (!$selectedAdSpace) {
-                $selectedAdSpace = $adSpacesForLocation
-                    ->where('scope', 'site')
-                    ->first();
+            if (!$selectedAd) {
+                $siteMatches = $ads->where('scope', 'site');
+                $selectedAd = $siteMatches->isNotEmpty() ? $siteMatches->random() : null;
             }
         } else if (is_category()) {
             $categoryId = get_queried_object_id();
-            $selectedAdSpace = $adSpacesForLocation
+            $categoryMatches = $ads
                 ->where('scope', 'category')
-                ->filter(function ($adSpace) use ($categoryId) {
-                    return in_array($categoryId, (array) ($adSpace['tax'] ?? []));
-                })
-                ->first();
+                ->filter(function ($ad) use ($categoryId) {
+                    return in_array($categoryId, $ad['tax']);
+                });
+            $selectedAd = $categoryMatches->isNotEmpty() ? $categoryMatches->random() : null;
 
-            if (!$selectedAdSpace) {
-                $selectedAdSpace = $adSpacesForLocation
-                    ->where('scope', 'site')
-                    ->first();
+            if (!$selectedAd) {
+                $siteMatches = $ads->where('scope', 'site');
+                $selectedAd = $siteMatches->isNotEmpty() ? $siteMatches->random() : null;
             }
         } else {
-            $selectedAdSpace = $adSpacesForLocation
-                ->where('scope', 'site')
-                ->first();
+            $siteMatches = $ads->where('scope', 'site');
+            $selectedAd = $siteMatches->isNotEmpty() ? $siteMatches->random() : null;
         }
 
-        $adType = $selectedAdSpace['ad_type'] ?? 'image';
+        $adType = $selectedAd['ad_type'] ?? 'image';
+        $adSpaces = collect($selectedAd['ad_spaces'] ?? []);
+        $selectedAdSpace = $adSpaces->isNotEmpty() ? $adSpaces->random() : null;
 
         return view('components.add-space', [
             'adType' => $adType,
