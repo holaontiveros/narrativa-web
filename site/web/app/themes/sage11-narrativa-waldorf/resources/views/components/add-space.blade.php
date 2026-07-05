@@ -39,7 +39,7 @@
 
 @if ($adType === 'html' && $htmlBody)
     <div class="mx-auto flex items-center justify-center relative z-0">
-      <div data-add-space class="relative inline-flex items-center justify-center @unless($sticky || $popup) min-w-[18.75rem] min-h-[6.25rem] md:min-w-[58rem] md:min-h-[11.25rem] @endunless">
+      <div data-add-space class="relative inline-flex items-center justify-center @unless($sticky || $popup) min-w-[18.75rem] min-h-[6.25rem] md:min-h-[11.25rem] @endunless">
         <div data-add-space-loader class="absolute inset-0 z-10 flex items-center justify-center">
           <span class="h-8 w-8 animate-spin rounded-full border-2 border-[#132A26]/20 border-t-[#132A26]" aria-hidden="true"></span>
           <span class="sr-only">Loading ad</span>
