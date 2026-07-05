@@ -99,6 +99,8 @@ class AddSpace extends Component
 
         return view('components.add-space', [
             'adType' => $adType,
+            'sticky' => $this->spaceId === 'sticky',
+            'popup' => $this->spaceId === 'popup',
             'bannerIdDesktop' => $selectedAdSpace['banner'] ?? null,
             'bannerIdMobile' => $selectedAdSpace['banner_mobile'] ?? null,
             'htmlBody' => $selectedAdSpace['html_body'] ?? null,

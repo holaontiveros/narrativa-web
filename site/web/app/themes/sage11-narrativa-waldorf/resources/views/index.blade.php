@@ -21,14 +21,15 @@
         @php($postIndex = 0)
         @while (have_posts())
             @php(the_post())
-            @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
-            @php($postIndex++)
 
             @if ($postIndex === 3)
                 <div class="w-full my-8">
                     <x-add-space :space-id="'cat_content'"/>
                 </div>
             @endif
+
+            @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
+            @php($postIndex++)
         @endwhile
     </div>
 

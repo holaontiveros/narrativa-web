@@ -150,7 +150,9 @@
                 "main_featured": "Featured en home",
                 "post_start": "Inicio de post",
                 "cat_start": "Inicio de categoría",
-                "cat_content": "Contenido de categoría"
+                "cat_content": "Contenido de categoría",
+                "sticky": "Sticky",
+                "popup": "Popup"
             },
             "default_value": [
                 "footer"
@@ -309,5 +311,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783221540
+    "modified": 1783223732
 }

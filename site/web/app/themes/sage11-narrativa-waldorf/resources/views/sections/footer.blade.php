@@ -27,3 +27,6 @@
         © {{ date('Y') }} {{ get_bloginfo('name') }}. {{ __('All rights reserved.', 'sage') }}
     </div>
 </footer>
+
+<x-add-space :space-id="'sticky'"/>
+<x-add-space :space-id="'popup'"/>
