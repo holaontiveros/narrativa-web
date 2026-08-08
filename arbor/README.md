@@ -38,8 +38,30 @@ Arbor is a mini-version of the [Roots Trellis](https://roots.io/trellis/) projec
 
 3. **Deploy**:
    ```bash
-   ./deploy.sh production
+   make deploy SITE=duraplast.mx ENV=production
    ```
+
+## Shared storage migration
+
+Production stores each site's persistent deployment data under its own folder
+on the mounted volume. For Duraplast, the layout is:
+
+```text
+/home/duraplast/htdocs/duraplast.mx/shared
+  -> /mnt/volume_nyc3_01/duraplast.mx/shared
+```
+
+Before the first deployment with this configuration, migrate the existing
+`shared` directory:
+
+```bash
+make migrate-shared SITE=duraplast.mx ENV=production
+```
+
+The migration verifies that `/mnt/volume_nyc3_01` is mounted and the destination
+is empty, copies the data with `rsync`, performs a final sync during a short
+cutover, verifies the result, creates the symlink, and only then removes the old
+copy to free disk space. It is safe to run again after a successful migration.
 
 ## Requirements 📋
 

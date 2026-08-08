@@ -1,1 +1,6 @@
-mysql_root_password: "{{ vault_mysql_root_password }}" # Define this variable in group_vars/production/vault.yml
+---
+# Define the password in group_vars/production/vault.yml.
+mysql_root_password: "{{ vault_mysql_root_password }}"
+# Persistent storage mounted on the server. Each site gets its own directory
+# beneath this path (for example, /mnt/volume_nyc3_01/duraplast.mx/shared).
+shared_volume_path: /mnt/volume_nyc3_01

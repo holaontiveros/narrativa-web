@@ -59,6 +59,9 @@ composer_classmap_authoritative: true
 # Helpers
 project: "{{ wordpress_sites[site] }}"
 project_root: "{{ www_root }}/{{ site }}"
+# deploy_helper always uses project_root/shared. When shared_path is external,
+# initialize.yml keeps that path as a symlink to the configured location.
+project_shared_path: "{{ project.shared_path | default(project_root + '/shared') }}"
 project_local_path: "{{ (lookup('env', 'USER') == 'vagrant') | ternary(project_root + '/' + project_current_path, project.local_path) }}"
 project_public_path: "{{ project.public_path | default('web') }}"
 project_upload_path: "{{ project.upload_path | default('app/uploads') }}"

@@ -2,32 +2,61 @@
 - name: Variable check
   import_playbook: variable-check.yml
   vars:
-    playbook: deploy.yml
+    playbook: server.yml
 
 - name: Test Connection
   hosts: web:&{{ env }}
   gather_facts: false
   roles:
-    - { role: connection, tags: [connection, always] }
+     - role: connection
+       tags: [connection, always]
 
 - name: Configure site in server
   hosts: web:&{{ env }}
-  become: yes
+  become: true
   tasks:
+    - name: Validate shared storage mount
+      ansible.builtin.command:
+          argv:
+            - mountpoint
+            - --quiet
+            - "{{ shared_volume_path }}"
+      changed_when: false
+
+    - name: Create each site's shared directory on the volume
+      ansible.builtin.file:
+          path: "{{ item.value.shared_path }}"
+          state: directory
+          owner: "{{ web_user }}"
+          group: "{{ web_group }}"
+          mode: '0755'
+      loop: "{{ wordpress_sites | dict2items }}"
+      loop_control:
+          label: "{{ item.key }}"
+      when: item.value.shared_path is defined
+        
     - name: Configure site in server
-      ansible.builtin.shell:
-        cmd: |
-          # exit code 1 when failed and text is domainName: This value already exists. \n siteUser: This value already exists.
-          # exit code 0 when success reand text is Site www.domain.com has been added.
-          clpctl site:add:php --domainName={{ site }} --phpVersion=8.3 --vhostTemplate='WP-nomulti' --siteUser={{ web_user }} --siteUserPassword='{{ vault_wordpress_sites[item.key].admin_password }}'
+      ansible.builtin.command:
+        argv:
+          - clpctl
+          - site:add:php
+          - "--domainName={{ item.key }}"
+          - "--phpVersion={{ php_version }}"
+          - --vhostTemplate=WP-nomulti
+          - "--siteUser={{ web_user }}"
+          - >-
+            --siteUserPassword={{
+            vault_wordpress_sites[item.key].admin_password }}
       loop: "{{ wordpress_sites | dict2items }}"
       loop_control:
         label: "{{ item.key }}"
       register: site_config_result
+      no_log: true
       failed_when: 
         - site_config_result.rc != 0
         - "'This value already exists' not in site_config_result.stdout"
       changed_when: "'has been added' in site_config_result.stdout"
   roles:
-    - { role: users, tags: [users] }
+    - role: users
+      tags: [users]
     

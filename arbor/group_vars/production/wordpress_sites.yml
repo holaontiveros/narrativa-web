@@ -1,3 +1,4 @@
+---
 # Created by trellis-cli v1.12.1
 # Documentation: https://roots.io/trellis/docs/wordpress-sites/
 
@@ -8,6 +9,7 @@ wordpress_sites:
         redirects:
           - www.lanarrativa.mx
     local_path: ../site
+    shared_path: "{{ shared_volume_path }}/lanarrativa.mx/shared"
     branch: main
     repo: git@github.com:holaontiveros/narrativa-web.git
     repo_subtree_path: site

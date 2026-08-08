@@ -14,6 +14,68 @@
   when: include_path.stat.exists
   tags: deploy-initialize-before
 
+- name: Validate external shared storage mount
+  ansible.builtin.command:
+    argv:
+      - mountpoint
+      - --quiet
+      - "{{ shared_volume_path }}"
+  changed_when: false
+  when:
+    - project_shared_path != project_root + '/shared'
+    - shared_volume_path is defined
+
+- name: Ensure project root exists for external shared storage
+  ansible.builtin.file:
+    path: "{{ project_root }}"
+    state: directory
+    mode: '0755'
+  when: project_shared_path != project_root + '/shared'
+
+- name: Inspect the deploy helper shared path
+  ansible.builtin.stat:
+    path: "{{ project_root }}/shared"
+    follow: false
+  register: deploy_shared_path
+  when: project_shared_path != project_root + '/shared'
+
+- name: Require migration of an existing local shared directory
+  ansible.builtin.fail:
+    msg: >-
+      {{ project_root }}/shared is an existing local directory. Run
+      `ansible-playbook migrate-shared.yml -e "site={{ site }} env={{ env }}"`
+      before deploying. This ensures its contents are copied safely to
+      {{ project_shared_path }}.
+  when:
+    - project_shared_path != project_root + '/shared'
+    - deploy_shared_path.stat.exists
+    - not (deploy_shared_path.stat.islnk | default(false))
+
+- name: Reject a shared symlink that points to an unexpected location
+  ansible.builtin.fail:
+    msg: >-
+      {{ project_root }}/shared points to
+      {{ deploy_shared_path.stat.lnk_source }}, but this site is configured to
+      use {{ project_shared_path }}.
+  when:
+    - project_shared_path != project_root + '/shared'
+    - deploy_shared_path.stat.islnk | default(false)
+    - deploy_shared_path.stat.lnk_source != project_shared_path
+
+- name: Ensure the external shared directory exists
+  ansible.builtin.file:
+    path: "{{ project_shared_path }}"
+    state: directory
+    mode: '0755'
+  when: project_shared_path != project_root + '/shared'
+
+- name: Link the deploy helper shared path to external storage
+  ansible.builtin.file:
+    path: "{{ project_root }}/shared"
+    src: "{{ project_shared_path }}"
+    state: link
+  when: project_shared_path != project_root + '/shared'
+
 - name: Initialize
   deploy_helper:
     current_path: "{{ project_current_path }}"
