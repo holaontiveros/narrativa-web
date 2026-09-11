@@ -49,7 +49,7 @@ class AddSpace extends Component
                 return in_array($this->spaceId, $ad['location']);
             });
 
-        $selectedAd = null;
+        $matchingAds = collect();
 
         if (is_single()) {
             $postId = get_the_ID();
@@ -58,9 +58,10 @@ class AddSpace extends Component
                 ->filter(function ($ad) use ($postId) {
                     return in_array($postId, $ad['posts']);
                 });
-            $selectedAd = $postMatches->isNotEmpty() ? $postMatches->random() : null;
 
-            if (!$selectedAd) {
+            if ($postMatches->isNotEmpty()) {
+                $matchingAds = $postMatches;
+            } else {
                 $categoryIds = wp_list_pluck(get_the_category($postId), 'term_id');
 
                 $categoryMatches = $ads
@@ -68,12 +69,10 @@ class AddSpace extends Component
                     ->filter(function ($ad) use ($categoryIds) {
                         return !empty(array_intersect($ad['tax'], (array) $categoryIds));
                     });
-                $selectedAd = $categoryMatches->isNotEmpty() ? $categoryMatches->random() : null;
-            }
 
-            if (!$selectedAd) {
-                $siteMatches = $ads->where('scope', 'site');
-                $selectedAd = $siteMatches->isNotEmpty() ? $siteMatches->random() : null;
+                $matchingAds = $categoryMatches->isNotEmpty()
+                    ? $categoryMatches
+                    : $ads->where('scope', 'site');
             }
         } else if (is_category()) {
             $categoryId = get_queried_object_id();
@@ -82,20 +81,47 @@ class AddSpace extends Component
                 ->filter(function ($ad) use ($categoryId) {
                     return in_array($categoryId, $ad['tax']);
                 });
-            $selectedAd = $categoryMatches->isNotEmpty() ? $categoryMatches->random() : null;
 
-            if (!$selectedAd) {
-                $siteMatches = $ads->where('scope', 'site');
-                $selectedAd = $siteMatches->isNotEmpty() ? $siteMatches->random() : null;
-            }
+            $matchingAds = $categoryMatches->isNotEmpty()
+                ? $categoryMatches
+                : $ads->where('scope', 'site');
         } else {
-            $siteMatches = $ads->where('scope', 'site');
-            $selectedAd = $siteMatches->isNotEmpty() ? $siteMatches->random() : null;
+            $matchingAds = $ads->where('scope', 'site');
         }
 
-        $adType = $selectedAd['ad_type'] ?? 'image';
-        $adSpaces = collect($selectedAd['ad_spaces'] ?? []);
-        $selectedAdSpace = $adSpaces->isNotEmpty() ? $adSpaces->random() : null;
+        $adSpaceOverride = $_GET['ad_space'] ?? null;
+        $adSpaceIndex = is_string($adSpaceOverride)
+            ? filter_var(wp_unslash($adSpaceOverride), FILTER_VALIDATE_INT, [
+                'options' => ['min_range' => 1],
+            ])
+            : false;
+
+        if ($adSpaceIndex !== false) {
+            // Preview a specific creative from every Ad in the winning
+            // targeting tier. Sorting makes a preview URL deterministic.
+            $selectedCreative = $matchingAds
+                ->sortBy('id')
+                ->flatMap(function ($ad) {
+                    return collect($ad['ad_spaces'])->map(function ($adSpace) use ($ad) {
+                        return [
+                            'ad_type' => $ad['ad_type'],
+                            'content' => $adSpace,
+                        ];
+                    });
+                })
+                ->values()
+                ->get($adSpaceIndex - 1);
+
+            $adType = $selectedCreative['ad_type'] ?? 'image';
+            $selectedAdSpace = $selectedCreative['content'] ?? null;
+        } else {
+            // Preserve the existing production rotation: choose an Ad first,
+            // then independently choose one of its creative rows.
+            $selectedAd = $matchingAds->isNotEmpty() ? $matchingAds->random() : null;
+            $adType = $selectedAd['ad_type'] ?? 'image';
+            $adSpaces = collect($selectedAd['ad_spaces'] ?? []);
+            $selectedAdSpace = $adSpaces->isNotEmpty() ? $adSpaces->random() : null;
+        }
 
         return view('components.add-space', [
             'adType' => $adType,
