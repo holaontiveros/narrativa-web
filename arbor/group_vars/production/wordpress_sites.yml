@@ -9,6 +9,8 @@ wordpress_sites:
         redirects:
           - www.lanarrativa.mx
     local_path: ../site
+    # Two previous releases, plus the active release.
+    deploy_keep_releases: 2
     shared_path: "{{ shared_volume_path }}/lanarrativa.mx/shared"
     branch: main
     repo: git@github.com:holaontiveros/narrativa-web.git
